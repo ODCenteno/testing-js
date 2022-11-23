@@ -3,7 +3,7 @@ const MongoLib = require('../lib/mongo.lib');
 class BooksService {
   constructor() {
     this.collection = 'books'; // Define la coleccion compatible en mongo
-    this.mongoDB = new MongoLib();
+    this.mongoDB = new MongoLib(); // Dependencia
   }
 
   getBooks(query) {
