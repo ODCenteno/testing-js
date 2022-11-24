@@ -1,20 +1,7 @@
+const { generateManyBooks } = require('../fakes/book.fake');
 const BooksService = require('./books.service');
 
-// Generando el fake de la base de datos con los libros
-const fakeBooks = [
-  {
-    _id: 1,
-    name: 'Harry Potter',
-  },
-];
-
 const mockGetAll = jest.fn();
-
-// const MongoLibStub = {
-//   // getAll: () => [...fakeBooks], para mock
-//   getAll: mockGetAll,
-//   create: () => {},
-// };
 
 // Método para suplantación mocking con jest
 jest.mock('../lib/mongo.lib', () => jest.fn().mockImplementation(() => ({
@@ -31,27 +18,29 @@ describe(' Test for BooksService', () => {
   });
 
   describe('test for getBooks', () => {
-    // test('should return a books list using mock', async () => {
-    //   // Arrange
-
-    //   // Act
-    //   const books = await service.getBooks({});
-    //   console.log(books);
-    //   // Assert
-    //   expect(books.length).toEqual(1);
-    // });
-
-    test('should return a books list with spy', async () => {
+    test('should return a list of 20 books using fake', async () => {
       // Arrange
+      const fakeBooks = generateManyBooks(20);
       mockGetAll.mockResolvedValue(fakeBooks);
       // Act
       const books = await service.getBooks({});
       console.log(books);
       // Assert
-      expect(books.length).toEqual(1);
+      expect(books.length).toEqual(20);
       expect(mockGetAll).toHaveBeenCalled();
       expect(mockGetAll).toHaveBeenCalledTimes(1);
       expect(mockGetAll).toHaveBeenCalledWith('books', { });
+    });
+
+    test('should return a list of 4 books using fake', async () => {
+      // Arrange
+      const fakeBooks = generateManyBooks(4);
+      mockGetAll.mockResolvedValue(fakeBooks);
+      // Act
+      const books = await service.getBooks({});
+      console.log(books);
+      // Assert
+      expect(books[0].name).toEqual(fakeBooks[0].name);
     });
   });
 });
