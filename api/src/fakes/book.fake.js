@@ -12,11 +12,7 @@ const generateManyBooks = (size) => {
   for (let index = 0; index < limit; index += 1) {
     fakeBooks.push(generateOneBook());
   }
-  console.log(`Fake books response: ${fakeBooks}`);
   return [...fakeBooks];
 };
-
-const tryit = generateManyBooks(7);
-console.log(tryit);
 
 module.exports = { generateOneBook, generateManyBooks };
