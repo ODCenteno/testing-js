@@ -6,7 +6,7 @@ const generateOneBook = () => ({
   price: faker.commerce.price(),
 });
 
-const generateManyBooks = (size) => () => {
+const generateManyBooks = (size) => {
   const limit = size ?? 10;
   const fakeBooks = [];
   for (let index = 0; index < limit; index += 1) {
