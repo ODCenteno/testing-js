@@ -1,8 +1,7 @@
+const mockGetAll = jest.fn(); // subí la declaración para que no lanzara error
 const request = require('supertest');
 const creatApp = require('../src/app');
 const { generateManyBooks } = require('../src/fakes/book.fake');
-
-const mockGetAll = jest.fn();
 
 // Método para suplantación mocking con jest
 jest.mock('../src/lib/mongo.lib', () => jest.fn().mockImplementation(() => ({
